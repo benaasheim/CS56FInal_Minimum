@@ -12,9 +12,9 @@ Jessica,Harris,1089765,555-5670,369 Pine St,Political Science,1089765@smc.edu,st
 Brian,Walker,1047382,555-2345,741 Maple St,Art,1047382@smc.edu,student
 Amanda,Lee,1075439,555-6540,963 Oak St,Music,1075439@smc.edu,student
 Steven,Allen,1023849,555-7896,258 Elm St,Theater,1023849@smc.edu,student
-Elizabeth,Young,1067895,555-8907,147 Cedar St,Chemical Engineering,1067895@smc.edu,student
-Matthew,Hernandez,1039847,555-1236,357 Birch St,Mechanical Engineering,1039847@smc.edu,student
-Ashley,King,1089237,555-5679,951 Willow St,Electrical Engineering,1089237@smc.edu,student
-Joshua,Wright,1056387,555-6789,456 Redwood St,Civil Engineering,1056387@smc.edu,student
-Rachel,Green,1079825,555-0986,753 Cypress St,Environmental Science,1079825@smc.edu,student
+Elizabeth,Young,1067895,555-8907,147 Cedar St,Chemistry,1067895@smc.edu,student
+Matthew,Hernandez,1039847,555-1236,357 Birch St,Engineering,1039847@smc.edu,student
+Ashley,King,1089237,555-5679,951 Willow St,Engineering,1089237@smc.edu,student
+Joshua,Wright,1056387,555-6789,456 Redwood St,Engineering,1056387@smc.edu,student
+Rachel,Green,1079825,555-0986,753 Cypress St,Geology,1079825@smc.edu,student
 James,Baker,1048759,555-8761,159 Pine St,Astronomy,1048759@smc.edu,student

@@ -14,7 +14,13 @@ public class Test {
         data.loadData();
         data.listStudentsFull();
     }
+    public static void test3() {
+        Database data = new Database();
+        data.loadData();
+        data.listStudentsFull();
+        data.saveData();
+    }
     public static void main(String[] args){
-        test2();
+        test3();
     }
 }

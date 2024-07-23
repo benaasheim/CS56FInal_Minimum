@@ -13,7 +13,7 @@ public class Student extends User implements Person {
     private String firstName;
     private String lastName;
     private int studentID;
-    private String major;
+    private Major major;
     private String phoneNumber;
     private String address;
 
@@ -36,7 +36,8 @@ public class Student extends User implements Person {
         this.studentID = studentID;
         this.phoneNumber = phoneNumber;
         this.address = address;
-        this.major = major;
+        System.out.println(major);
+        this.major = Major.fromString(major);
         setUsername(generateStudentEmail(studentID));
         setPassword(DEFAULT_PASSWORD);
     }
@@ -111,7 +112,7 @@ public class Student extends User implements Person {
      *
      * @return The major of the student.
      */
-    public String getMajor() {
+    public Major getMajor() {
         return major;
     }
 
@@ -121,7 +122,7 @@ public class Student extends User implements Person {
      * @param major The new major of the student.
      */
     public void setMajor(String major) {
-        this.major = major;
+        this.major = Major.fromString(major);
     }
 
     @Override
