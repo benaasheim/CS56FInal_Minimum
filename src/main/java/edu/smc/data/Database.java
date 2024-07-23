@@ -13,7 +13,17 @@ import java.util.Set;
 import java.nio.file.Path;
 
 public class Database {
+    public static final String AN_ERROR_OCCURRED = "An error occurred: ";
+    public static final String write_file_destination = "/datatest.txt";
+    public static final String read_file_destination = "data.txt";
+    public static final int student_ID_Lower_Bound = 1000000;
+    public static final int student_ID_Range = 9000000;
+    public static final String REGEX = ",";
+    public static final String USER_DIR = "user.dir";
+
     Set<Student> studentList;
+
+
 
 
 
@@ -59,7 +69,7 @@ public class Database {
         int randomNumber;
 
         do{
-            randomNumber = random.nextInt(9000000) + 1000000;
+            randomNumber = random.nextInt(student_ID_Range) + student_ID_Lower_Bound;
             for(Student student: studentList){
                 if(student.getStudentID() == randomNumber){
                     IDExist = true;
@@ -70,13 +80,13 @@ public class Database {
         return randomNumber;
     }
      public void loadData(){
-         File dataFile = new File("data.txt");
+         File dataFile = new File(read_file_destination);
          try {
              Scanner scanner = new Scanner(dataFile);
              String line;
              while(scanner.hasNextLine()){
                  line = scanner.nextLine();
-                 studentList.add(new Student(line.split(",")));
+                 studentList.add(new Student(line.split(REGEX)));
              }
          } catch (FileNotFoundException e) {
              throw new RuntimeException(e);
@@ -90,7 +100,7 @@ public class Database {
          }
 
          // Defining the file name of the file
-         Path fileName = Path.of(System.getProperty("user.dir") + "/datatest.txt");
+         Path fileName = Path.of(System.getProperty(USER_DIR) + write_file_destination);
 
          try {
              // Writing into the file
@@ -103,7 +113,7 @@ public class Database {
              System.out.println(fileContent);
          } catch (IOException e) {
              // Handling any I/O exceptions
-             System.err.println("An error occurred: " + e.getMessage());
+             System.err.println(AN_ERROR_OCCURRED + e.getMessage());
          }
      }
 }

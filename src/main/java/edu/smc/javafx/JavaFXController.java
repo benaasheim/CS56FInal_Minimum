@@ -2,6 +2,7 @@ package edu.smc.javafx;
 
 import edu.smc.data.Student;
 import edu.smc.network.Client;
+import edu.smc.network.Server;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,6 +25,10 @@ public class JavaFXController {
     private static final String CMD_LIST = "list";
     private static final String SUCCESS = "true";
     private static final String Fail = "false";
+    public static final int DELAY = 2;
+    public static final String STUDENT_REMOVED_SUCCESS = "Student removed";
+    public static final String STUDENT_REMOVED_FAIL = "Student does not exist";
+    public static final String SERVER_ADDRESS = "localhost";
 
     @FXML
     private TextField username;
@@ -133,7 +138,7 @@ public class JavaFXController {
     private void loadListView(Window window) {
 
         try {
-            this.client = new Client("localhost", 5000);
+            this.client = new Client("localhost", Server.PORT);
             client.sendToServer(CMD_LIST.trim());
             VBox vbox = new VBox();
             vbox.setPadding(new Insets(3));
@@ -160,7 +165,7 @@ public class JavaFXController {
     //add student view controller
     public void onAddStudentAction(ActionEvent event) {
         try {
-            this.client = new Client("localhost", 5000);
+            this.client = new Client("localhost", Server.PORT);
             StringBuilder request = new StringBuilder();
             request.append(CMD_ADD);
             request.append(firstName.getText() + "#");
@@ -175,7 +180,7 @@ public class JavaFXController {
                 message.setText("Student already exist");
             }
             client.close();
-            PauseTransition pause = new PauseTransition(Duration.seconds(2)); //Delay for 2 seconds
+            PauseTransition pause = new PauseTransition(Duration.seconds(DELAY)); //Delay for 2 seconds
             pause.setOnFinished(e -> loadAdminView(((Node) event.getSource()).getScene().getWindow()));
             pause.play();
         } catch (IOException e) {
@@ -186,18 +191,18 @@ public class JavaFXController {
 
     public void onRemoveStudentAction(ActionEvent event) {
         try{
-            this.client = new Client("localhost", 5000);
+            this.client = new Client(SERVER_ADDRESS, Server.PORT);
             StringBuilder request = new StringBuilder();
             request.append(CMD_REMOVE);
             request.append(studentID.getText());
             client.sendToServer(request.toString());
             if(client.readFromServer().equals(SUCCESS)){
-                message.setText("Student removed");
+                message.setText(STUDENT_REMOVED_SUCCESS);
             }else{
-                message.setText("Student does not exist");
+                message.setText(STUDENT_REMOVED_FAIL);
             }
             client.close();
-            PauseTransition pause = new PauseTransition(Duration.seconds(2)); //Delay for 2 seconds
+            PauseTransition pause = new PauseTransition(Duration.seconds(DELAY)); //Delay for 2 seconds
             pause.setOnFinished(e -> loadAdminView(((Node) event.getSource()).getScene().getWindow()));
             pause.play();
         }catch(IOException e){

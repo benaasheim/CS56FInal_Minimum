@@ -10,6 +10,8 @@ import java.util.Objects;
  * Implements the Person interface for personal information.
  */
 public class Student extends User implements Person {
+    public static final String STUDENT = "student\n";
+    public static final String DOMAIN = "@smc.edu";
     private String firstName;
     private String lastName;
     private int studentID;
@@ -55,7 +57,7 @@ public class Student extends User implements Person {
      * @return The generated email address.
      */
     private String generateStudentEmail(int studentID) {
-        return Integer.toString(studentID) + "@smc.edu";
+        return Integer.toString(studentID) + DOMAIN;
     }
 
     /**
@@ -131,8 +133,7 @@ public class Student extends User implements Person {
     }
 
     public String toData() {
-        //James,Baker,1048759,555-8761,159 Pine St,Astronomy,1048759@smc.edu,student
-        return firstName + "," + lastName + "," + studentID + "," + phoneNumber + "," + address + "," + phoneNumber + "," + getUsername() + "," + "student\n";
+        return firstName + Database.REGEX + lastName + Database.REGEX + studentID + Database.REGEX + phoneNumber + Database.REGEX + address + Database.REGEX + phoneNumber + Database.REGEX + getUsername() + Database.REGEX + STUDENT;
     }
 
     @Override

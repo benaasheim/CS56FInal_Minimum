@@ -35,6 +35,7 @@ public enum Major {
     THEA("Theater"),
     UNDC("Undeclared");
 
+    public static final String UNABLE_TO_RESOLVE_MAJOR = "Unable to resolve major: ";
     private final String text;
 
     Major(String text) {
@@ -49,6 +50,6 @@ public enum Major {
         return Arrays.stream(Major.values())
                 .filter(val -> val.text.equals(majorText))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Unable to resolve blah: " + majorText));
+                .orElseThrow(() -> new IllegalArgumentException(UNABLE_TO_RESOLVE_MAJOR + majorText));
     }
 }
