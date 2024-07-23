@@ -40,10 +40,11 @@ public class Student extends User implements Person {
         setUsername(generateStudentEmail(studentID));
         setPassword(DEFAULT_PASSWORD);
     }
-    public Student(String firstName, String lastName, int studentID, String phoneNumber, String address, String major, String username, String password) {
-        this(firstName, lastName, studentID, phoneNumber, address, major);
-        setUsername(username);
-        setPassword(password);
+
+    public Student(String[] data) {
+        this(data[0], data[1], Integer.valueOf(data[2]), data[3], data[4], data[5]);
+        setUsername(data[6]);
+        setPassword(data[7]);
     }
 
     /**
@@ -126,6 +127,11 @@ public class Student extends User implements Person {
     @Override
     public String toString() {
         return "Student: " + firstName + " " + lastName + ", ID: " + studentID + "#";
+    }
+
+    public String toData() {
+        //James,Baker,1048759,555-8761,159 Pine St,Astronomy,1048759@smc.edu,student
+        return firstName + "," + lastName + "," + studentID + "," + phoneNumber + "," + address + "," + phoneNumber + "," + getUsername() + "," + "student\n";
     }
 
     @Override

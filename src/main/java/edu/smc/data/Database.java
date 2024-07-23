@@ -4,10 +4,13 @@ package edu.smc.data;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
+import java.nio.file.Path;
 
 public class Database {
     Set<Student> studentList;
@@ -45,6 +48,11 @@ public class Database {
         }
         return list.toString();
     }
+    public void listStudentsFull() {
+        for(Student i: studentList){
+            System.out.println(i.toData());
+        }
+    }
     private int generateID(){
         boolean IDExist = false;
         Random random = new Random();
@@ -68,23 +76,34 @@ public class Database {
              String line;
              while(scanner.hasNextLine()){
                  line = scanner.nextLine();
-                 studentList.add(parseData(line.split(",")));
-
+                 studentList.add(new Student(line.split(",")));
              }
          } catch (FileNotFoundException e) {
              throw new RuntimeException(e);
          }
      }
-    private Student parseData(String[] data){
-        String firstname = data[0];
-        String lastname = data[1];
-        int studentID = Integer.valueOf(data[2]);
-        String phoneNumber = data[3];
-        String address = data[4];
-        String major = data[5];
-        String username = data[6];
-        String password = data[7];
-        return new Student(firstname, lastname, studentID, phoneNumber, address, major, username, password);
-    }
+     public void saveData() {
+         // Assigning the content of the file
+         String text = "";
+         for (Student student: studentList) {
+             text += student.toData();
+         }
 
+         // Defining the file name of the file
+         Path fileName = Path.of("/Users/Ben/Documents/GitHub/CS56FInal_Minimum/datatest.txt");
+
+         try {
+             // Writing into the file
+             Files.writeString(fileName, text);
+
+             // Reading the content of the file
+             String fileContent = Files.readString(fileName);
+
+             // Printing the content inside the file
+             System.out.println(fileContent);
+         } catch (IOException e) {
+             // Handling any I/O exceptions
+             System.err.println("An error occurred: " + e.getMessage());
+         }
+     }
 }

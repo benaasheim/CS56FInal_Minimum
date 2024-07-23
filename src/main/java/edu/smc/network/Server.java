@@ -108,7 +108,7 @@ public class Server {
         // Create a new Server instance
         Server server = new Server();
         // Start the server at port 5000
-        server.start(5000);
+        server.start(5050);
 
     }
 }
