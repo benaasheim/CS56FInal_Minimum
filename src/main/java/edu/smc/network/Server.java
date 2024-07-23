@@ -16,13 +16,18 @@ public class Server {
     private static final String CMD_LIST = "list";
     private static final String SUCCESS = "true";
     private static final String Fail = "false";
+    public static final String REGEX = "#";
+    public static final String USERNAME = "admin";
+    public static final String PASSWORD = "admin";
+    public static final boolean AUTO_FLUSH = true;
+    public static final int PORT = 5000;
     private ServerSocket serverSocket;
     private Socket clientSocket;
     private PrintWriter out;
     private BufferedReader in;
 
     private Database data = new Database();
-    private Administrator admin = new Administrator("admin", "admin");
+    private Administrator admin = new Administrator(USERNAME, PASSWORD);
 
 
     public void start(int port) {
@@ -39,7 +44,7 @@ public class Server {
                 clientSocket = serverSocket.accept();
 
                 // Initialize the PrintWriter for the output stream of the client socket
-                out = new PrintWriter(clientSocket.getOutputStream(), true);
+                out = new PrintWriter(clientSocket.getOutputStream(), AUTO_FLUSH);
 
                 // Initialize the BufferedReader for the input stream of the client socket
                 in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
@@ -50,7 +55,7 @@ public class Server {
                 // Read each incoming line from the client
                 // And echo it back to the client until 'bye' is received
                 while ((inputLine = in.readLine()) != null) {
-                    String[] parse = inputLine.split("#");
+                    String[] parse = inputLine.split(REGEX);
                     if (parse[0].equals(CMD_LOGIN)) {
                         if (parse[1].equals(admin.getUsername()) && parse[2].equals(admin.getPassword())) {
                             out.println(SUCCESS);
@@ -108,7 +113,7 @@ public class Server {
         // Create a new Server instance
         Server server = new Server();
         // Start the server at port 5000
-        server.start(5050);
+        server.start(PORT);
 
     }
 }
