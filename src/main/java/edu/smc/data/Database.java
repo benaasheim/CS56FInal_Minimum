@@ -90,7 +90,7 @@ public class Database {
          }
 
          // Defining the file name of the file
-         Path fileName = Path.of("/Users/Ben/Documents/GitHub/CS56FInal_Minimum/datatest.txt");
+         Path fileName = Path.of(System.getProperty("user.dir") + "/datatest.txt");
 
          try {
              // Writing into the file
