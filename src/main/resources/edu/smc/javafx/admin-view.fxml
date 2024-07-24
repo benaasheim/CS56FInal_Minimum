@@ -11,6 +11,8 @@
     <children>
         <Button text="Modify" alignment="CENTER" onAction="#onModifyAction" maxWidth="200"/>
         <Button text="List" alignment="CENTER" maxWidth="200" onAction="#onListAction"/>
+        <Button text="Logout" alignment="CENTER" maxWidth="200" onAction="#onLogoutAction"/>
+
     </children>
 </VBox>
 

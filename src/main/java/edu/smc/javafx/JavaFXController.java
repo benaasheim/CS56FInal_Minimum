@@ -24,6 +24,8 @@ public class JavaFXController {
     private static final String CMD_LIST = "list";
     private static final String SUCCESS = "true";
     private static final String Fail = "false";
+    private static final String ADMIN = "admin";
+    private static final String STUDENT = "student";
 
     @FXML
     private TextField username;
@@ -43,10 +45,13 @@ public class JavaFXController {
     private TextField address;
     @FXML
     private TextField major;
-
+    @FXML
+    private CheckBox isAdmin;
 
     @FXML
     private Label message;
+
+    private String userKey;
     private Client client;
 
     //initial view controller
@@ -55,15 +60,28 @@ public class JavaFXController {
         try {
             this.client = new Client("localhost", 5000);
             StringBuilder request = new StringBuilder(CMD_LOGIN);
-            request.append(username.getText() + "#");
-            request.append(password.getText());
-            client.sendToServer(request.toString());
-            if (client.readFromServer().equals("true")) {
-                loadAdminView(((Node) event.getSource()).getScene().getWindow());
-            } else {
-                message.setText("login failed");
+            request.append(userKey = username.getText() + "#");
+            request.append(password.getText()+ "#");
+            if(isAdmin.isSelected()){
+                request.append(ADMIN);
+                client.sendToServer(request.toString());
+                if (client.readFromServer().equals("true")) {
+                    client.close();
+                    loadAdminView(((Node) event.getSource()).getScene().getWindow());
+                } else {
+                    message.setText("login failed");
+                }
+            }else{
+                request.append(STUDENT);
+                client.sendToServer(request.toString());
+                if(client.readFromServer().equals("true")){
+                    client.close();
+                    loadStudentView(((Node)event.getSource()).getScene().getWindow());
+                } else {
+                    message.setText("login failed");
+                }
             }
-            client.close();
+
         } catch (IOException e) {
 
         }
@@ -131,10 +149,9 @@ public class JavaFXController {
     }
 
     private void loadListView(Window window) {
-
         try {
             this.client = new Client("localhost", 5000);
-            client.sendToServer(CMD_LIST.trim());
+            client.sendToServer(CMD_LIST);
             VBox vbox = new VBox();
             vbox.setPadding(new Insets(3));
             String[] students = client.readFromServer().split("#");
@@ -203,8 +220,40 @@ public class JavaFXController {
         }catch(IOException e){
 
         }
-
-
-
+    }
+    public void loadStudentView(Window window){
+        try {
+            this.client = new Client("localhost", 5000);
+            String studentID = userKey.substring(0,7);
+            StringBuilder request = new StringBuilder("info#");
+            request.append(studentID);
+            client.sendToServer(request.toString());
+            VBox vbox = new VBox();
+            vbox.setPadding(new Insets(3));
+            String[] students = client.readFromServer().split("#");
+            for(String student: students) {
+                Label label = new Label(student);
+                vbox.getChildren().add(label);
+            }
+            client.close();
+            ScrollPane scrollPane = new ScrollPane();
+            scrollPane.setContent(vbox);
+            VBox mainLayout = new VBox(scrollPane);
+            Scene scene = new Scene(mainLayout, 320, 240);
+            ((Stage)window).setScene(scene);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @FXML
+    public void onLogoutAction(ActionEvent event) {
+        Window window = ((Node) event.getSource()).getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(JavaFXController.class.getResource("initial-view.fxml"));
+        try {
+            Scene scene = new Scene(loader.load(),320,240);
+            ((Stage) window).setScene(scene);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

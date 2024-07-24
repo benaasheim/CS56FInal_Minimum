@@ -4,6 +4,7 @@ package edu.smc.data;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Scanner;
@@ -45,6 +46,14 @@ public class Database {
         }
         return list.toString();
     }
+    public boolean verify(String username, String password){
+        for(Student student: studentList){
+            if(student.verify(username,password)){
+                return true;
+            }
+        }
+        return false;
+    }
     private int generateID(){
         boolean IDExist = false;
         Random random = new Random();
@@ -69,8 +78,8 @@ public class Database {
              while(scanner.hasNextLine()){
                  line = scanner.nextLine();
                  studentList.add(parseData(line.split(",")));
-
              }
+             scanner.close();
          } catch (FileNotFoundException e) {
              throw new RuntimeException(e);
          }
@@ -85,6 +94,19 @@ public class Database {
         String username = data[6];
         String password = data[7];
         return new Student(firstname, lastname, studentID, phoneNumber, address, major, username, password);
+    }
+
+    public void saveData(){
+        File dataFile = new File("data.txt");
+        try {
+            PrintWriter writer = new PrintWriter(dataFile);
+            for (Student student : studentList) {
+                writer.println(student.getFirstName() + "," + student.getLastName() + "," + student.getStudentID() + "," + student.getPhoneNumber() + "," + student.getAddress() + "," + student.getMajor() + "," + student.getUsername() + "," + student.getPassword());
+            }
+            writer.close();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

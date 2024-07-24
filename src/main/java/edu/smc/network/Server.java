@@ -1,13 +1,11 @@
 package edu.smc.network;
 
-import edu.smc.base.User;
 import edu.smc.data.Administrator;
 import edu.smc.data.Database;
 import edu.smc.data.Student;
 
 import java.io.*;
 import java.net.*;
-import java.util.Set;
 
 public class Server {
     private static final String CMD_LOGIN = "login";
@@ -15,7 +13,9 @@ public class Server {
     private static final String CMD_REMOVE = "remove";
     private static final String CMD_LIST = "list";
     private static final String SUCCESS = "true";
-    private static final String Fail = "false";
+    private static final String FAIL = "false";
+    private static final String ADMIN = "admin";
+    private static final String STUDENT = "student";
     private ServerSocket serverSocket;
     private Socket clientSocket;
     private PrintWriter out;
@@ -52,29 +52,54 @@ public class Server {
                 while ((inputLine = in.readLine()) != null) {
                     String[] parse = inputLine.split("#");
                     if (parse[0].equals(CMD_LOGIN)) {
-                        if (parse[1].equals(admin.getUsername()) && parse[2].equals(admin.getPassword())) {
-                            out.println(SUCCESS);
+                        if(parse[3].equals(ADMIN)){
+                            if(admin.verify(parse[1], parse[2])){
+                                out.println(SUCCESS);
+                            }else{
+                                out.println(FAIL);
+                            }
                         } else {
-                            out.println(Fail);
+                            if (data.verify(parse[1], parse[2])) {
+                                out.println(SUCCESS);
+                            } else {
+                                out.println(FAIL);
+                            }
                         }
                     } else if (parse[0].equals(CMD_ADD)) {
                         boolean studentExist = data.addStudent(parse[1], parse[2], parse[3],parse[4], parse[5]);
                         if(studentExist){
                             out.println(SUCCESS);
+                            data.saveData();
                         }else{
-                            out.println(Fail);
+                            out.println(FAIL);
                         }
-
                     } else if (parse[0].equals(CMD_REMOVE)) {
                         boolean studentRemoved = data.removeStudent(Integer.valueOf(parse[1]));
                         if(studentRemoved){
                             out.println(SUCCESS);
+                            data.saveData();
                         }else{
-                            out.println(Fail);
+                            out.println(FAIL);
                         }
+
                     } else if (parse[0].equals(CMD_LIST)) {
                         out.println(data.listStudents());
 
+                    } else if (parse[0].equals("info")){
+                        int studentID = Integer.valueOf(parse[1]);
+                        Student student = data.getStudent(studentID);
+                        if (student != null) {
+                            StringBuilder info = new StringBuilder();
+                            info.append(student.getFirstName()+ "#");
+                            info.append(student.getLastName()+ "#");
+                            info.append(student.getStudentID()+ "#");
+                            info.append(student.getPhoneNumber()+ "#");
+                            info.append(student.getAddress()+ "#");
+                            info.append(student.getMajor());
+                            out.println(info.toString());
+                        } else {
+                            out.println(FAIL);
+                        }
                     }
                 }
 

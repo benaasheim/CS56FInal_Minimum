@@ -1,20 +1,20 @@
-John,Doe,1059847,555-1234,123 Elm St,Computer Science,1059847@smc.edu,student
-Jane,Smith,1092873,555-5678,456 Oak St,Biology,1092873@smc.edu,student
-Emily,Johnson,1019374,555-8765,789 Pine St,Mathematics,1019374@smc.edu,student
-Michael,Brown,1082354,555-4321,321 Maple St,Engineering,1082354@smc.edu,student
-Sarah,Davis,1038495,555-9876,654 Spruce St,Chemistry,1038495@smc.edu,student
-David,Wilson,1067349,555-3456,987 Cedar St,Physics,1067349@smc.edu,student
-Laura,Martinez,1049583,555-6543,159 Birch St,History,1049583@smc.edu,student
-Daniel,Garcia,1072895,555-7890,753 Willow St,English,1072895@smc.edu,student
-Megan,Clark,1093746,555-0987,951 Redwood St,Philosophy,1093746@smc.edu,student
-Andrew,Lopez,1029854,555-8760,852 Cypress St,Economics,1029854@smc.edu,student
-Jessica,Harris,1089765,555-5670,369 Pine St,Political Science,1089765@smc.edu,student
-Brian,Walker,1047382,555-2345,741 Maple St,Art,1047382@smc.edu,student
-Amanda,Lee,1075439,555-6540,963 Oak St,Music,1075439@smc.edu,student
-Steven,Allen,1023849,555-7896,258 Elm St,Theater,1023849@smc.edu,student
-Elizabeth,Young,1067895,555-8907,147 Cedar St,Chemical Engineering,1067895@smc.edu,student
-Matthew,Hernandez,1039847,555-1236,357 Birch St,Mechanical Engineering,1039847@smc.edu,student
 Ashley,King,1089237,555-5679,951 Willow St,Electrical Engineering,1089237@smc.edu,student
+Daniel,Garcia,1072895,555-7890,753 Willow St,English,1072895@smc.edu,student
+Amanda,Lee,1075439,555-6540,963 Oak St,Music,1075439@smc.edu,student
+David,Wilson,1067349,555-3456,987 Cedar St,Physics,1067349@smc.edu,student
+Michael,Brown,1082354,555-4321,321 Maple St,Engineering,1082354@smc.edu,student
+Andrew,Lopez,1029854,555-8760,852 Cypress St,Economics,1029854@smc.edu,student
+John,Doe,1059847,555-1234,123 Elm St,Computer Science,1059847@smc.edu,student
+Sarah,Davis,1038495,555-9876,654 Spruce St,Chemistry,1038495@smc.edu,student
 Joshua,Wright,1056387,555-6789,456 Redwood St,Civil Engineering,1056387@smc.edu,student
 Rachel,Green,1079825,555-0986,753 Cypress St,Environmental Science,1079825@smc.edu,student
+Matthew,Hernandez,1039847,555-1236,357 Birch St,Mechanical Engineering,1039847@smc.edu,student
+Megan,Clark,1093746,555-0987,951 Redwood St,Philosophy,1093746@smc.edu,student
 James,Baker,1048759,555-8761,159 Pine St,Astronomy,1048759@smc.edu,student
+Jessica,Harris,1089765,555-5670,369 Pine St,Political Science,1089765@smc.edu,student
+Steven,Allen,1023849,555-7896,258 Elm St,Theater,1023849@smc.edu,student
+Elizabeth,Young,1067895,555-8907,147 Cedar St,Chemical Engineering,1067895@smc.edu,student
+Emily,Johnson,1019374,555-8765,789 Pine St,Mathematics,1019374@smc.edu,student
+Laura,Martinez,1049583,555-6543,159 Birch St,History,1049583@smc.edu,student
+Jane,Smith,1092873,555-5678,456 Oak St,Biology,1092873@smc.edu,student
+Brian,Walker,1047382,555-2345,741 Maple St,Art,1047382@smc.edu,student
