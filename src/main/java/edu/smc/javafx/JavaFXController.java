@@ -239,6 +239,9 @@ public class JavaFXController {
             ScrollPane scrollPane = new ScrollPane();
             scrollPane.setContent(vbox);
             VBox mainLayout = new VBox(scrollPane);
+            Button button = new Button("Logout");
+            button.setOnAction(e -> loadInitialView(window));
+            mainLayout.getChildren().add(button);
             Scene scene = new Scene(mainLayout, 320, 240);
             ((Stage)window).setScene(scene);
         } catch (IOException e) {
@@ -247,7 +250,10 @@ public class JavaFXController {
     }
     @FXML
     public void onLogoutAction(ActionEvent event) {
-        Window window = ((Node) event.getSource()).getScene().getWindow();
+        loadInitialView(((Node) event.getSource()).getScene().getWindow());
+
+    }
+    public void loadInitialView(Window window){
         FXMLLoader loader = new FXMLLoader(JavaFXController.class.getResource("initial-view.fxml"));
         try {
             Scene scene = new Scene(loader.load(),320,240);
@@ -256,4 +262,5 @@ public class JavaFXController {
             throw new RuntimeException(e);
         }
     }
+
 }
